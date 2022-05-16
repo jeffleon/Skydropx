@@ -1,11 +1,11 @@
-import LabelRequestRepository from "../core/repositories/labelRequest.repository";
-import RequestLabelModel from "./database/requestLabel.model";
-import RequestLabel from "../core/entities/RequestLabel";
-import sequelize from "./database/config";
+import LabelRequestRepository from "../../core/repositories/labelRequest.repository";
+import RequestLabelModel from "./requestLabel.model";
+import RequestLabel from "../../core/entities/RequestLabel";
+import sequelize from "./config";
 
 
 
-class RequestLabelSql implements LabelRequestRepository {
+class requestLabelSequelize implements LabelRequestRepository {
     public async save(request: RequestLabel): Promise<RequestLabel> {
         const response = await RequestLabelModel.create(request);
         return response;
@@ -24,4 +24,4 @@ class RequestLabelSql implements LabelRequestRepository {
     }
 }
 
-export default RequestLabelSql;
+export default requestLabelSequelize;

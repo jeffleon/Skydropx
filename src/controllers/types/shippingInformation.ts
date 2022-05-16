@@ -1,4 +1,4 @@
-export interface ShippingInformationDTO {
+export interface ShippingInformationType {
     carrier: string;
     shipment: ShippingDetailsObject;
 }
