@@ -1,6 +1,6 @@
 import RequestLabel from "../entities/RequestLabel";
 import { v4 as uuid } from 'uuid';
-import LabelRequestRepository from "../repositories/labelReques.repository";
+import LabelRequestRepository from "../repositories/labelRequest.repository";
 
 
 const saveRequest = (labelRequestRepository:LabelRequestRepository) => async (carrier:string) => {

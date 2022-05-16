@@ -1,4 +1,4 @@
-import LabelRequestRepository from "../core/repositories/labelReques.repository";
+import LabelRequestRepository from "../core/repositories/labelRequest.repository";
 import { Sequelize } from "sequelize";
 import RequestLabelModel from "./models/RequestLabel.model";
 import RequestLabel from "../core/entities/RequestLabel";
