@@ -1,6 +1,6 @@
 export default interface RequestLabel {
     status: string;
-    carrierId: string;
+    carrierName: string;
     requestId: string;
     urlZip: string;
 }
