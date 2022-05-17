@@ -4,25 +4,33 @@ import pdf from "html-pdf";
 import { content } from "./pdfTemplate";
 import { ShippingDetailsObject } from "../../controllers/types/shippingInformation";
 import {exec} from "child_process";
+import JSZip from 'jszip';
+import fs from 'fs';
+import { saveAs } from "file-saver";
+import AdmZip from "adm-zip";
 
 
 class ZipPdf implements ZipPdfRepository {
     
-    public createZip(requestId: string): Promise<RequestLabel> {
-        throw new Error("Method not implemented.");
+    public async createZip(requestId: string): Promise<any> {
+        const zip = new AdmZip();
+        const outputFile = `./pdfs/${requestId}.zip`;
+        zip.addLocalFolder("./pdfs");
+        zip.writeZip(outputFile);
+        return new Promise(()=>{})
     }
 
     private createPdfDirectory(){
-        exec("mkdir pdfs");
+        exec("rm -rf pdfs; mkdir pdfs");
     }
     
-    public createPdf(name: string, destinationLabel:ShippingDetailsObject): void {
+    public createPdf(name: string, destinationLabel:ShippingDetailsObject, id:string): void{
         this.createPdfDirectory()
-        pdf.create(content(destinationLabel)).toFile(`./pdfs/${name}.pdf`, function(err, res) {
+        pdf.create(content(destinationLabel)).toFile(`./pdfs/${name}_${id}.pdf`, function(err, res) {
             if (err){
-                console.log(err);
+                throw new Error;
             } else {
-                console.log(res);
+                return res;
             }
         });
     }

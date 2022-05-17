@@ -14,10 +14,9 @@ const saveRequest =(labelRequestRepository:LabelRequestRepository) => async (car
         requestId: id,
         urlZip: "",
     };
-    console.log("carrier",carrier);
     const resquestLabelPost = await labelRequestRepository.save(requestLabel);
     const childProcess = fork(path.join(__dirname, 'zipPdfGenerator.interactor.ts'));
-    childProcess.send({carrier});
+    childProcess.send({carrier, id});
     return  resquestLabelPost;
 }
 
