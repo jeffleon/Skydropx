@@ -1,10 +1,11 @@
 import { Sequelize } from 'sequelize';
+import 'dotenv/config';
 
 const sequelize = new Sequelize(
-    "sky_dropx",
-    "root",
-    "secret",{
-        host: "localhost",
+    process.env.database,
+    process.env.user,
+    process.env.password,{
+        host: process.env.host,
         dialect: "mysql"
     }
 );

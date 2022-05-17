@@ -1,6 +1,5 @@
 import { ShippingInformationType } from "../../controllers/types/shippingInformation";
 import ZipPdf from "../../dataSources/pdf&zip/pdf&Zip.datasource";
-import fs from "fs";
 
 process.on("message", ({carrier, id})=> {
     zipGenerator(carrier, id);

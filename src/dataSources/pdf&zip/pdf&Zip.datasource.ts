@@ -16,15 +16,14 @@ class ZipPdf implements ZipPdfRepository {
         const zip = new AdmZip();
         const outputFile = `./pdfs/${requestId}.zip`;
         zip.addLocalFolder("./pdfs");
-        zip.writeZip(outputFile);
-        return new Promise(()=>{})
+        return zip.writeZip(outputFile);
     }
 
     private createPdfDirectory(){
         exec("rm -rf pdfs; mkdir pdfs");
     }
     
-    public createPdf(name: string, destinationLabel:ShippingDetailsObject, id:string): void{
+    public createPdf(name: string, destinationLabel:ShippingDetailsObject, id:string):void{
         this.createPdfDirectory()
         pdf.create(content(destinationLabel)).toFile(`./pdfs/${name}_${id}.pdf`, function(err, res) {
             if (err){
