@@ -6,7 +6,7 @@ import path from "path";
 import { ShippingInformationType } from "../../controllers/types/shippingInformation";
 
 
-const saveRequest =(labelRequestRepository:LabelRequestRepository) => async (carrier:ShippingInformationType[]) => {
+const saveRequest = (labelRequestRepository:LabelRequestRepository) => async (shippingInfo:ShippingInformationType[]) => {
     const id: string = uuid();
     const requestLabel: RequestLabel = {
         status: "pending",
@@ -16,7 +16,7 @@ const saveRequest =(labelRequestRepository:LabelRequestRepository) => async (car
     };
     const resquestLabelPost = await labelRequestRepository.save(requestLabel);
     const childProcess = fork(path.join(__dirname, 'zipPdfGenerator.interactor.ts'));
-    childProcess.send({carrier, id});
+    childProcess.send({shippingInfo, id});
     return  resquestLabelPost;
 }
 

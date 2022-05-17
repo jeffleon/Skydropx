@@ -1,5 +1,5 @@
 import { ShippingInformationType } from "../../controllers/types/shippingInformation";
-import ZipPdf from "../../dataSources/PDF&ZIP/pdf&Zip.datasource";
+import ZipPdf from "../../dataSources/pdf&zip/pdf&Zip.datasource";
 import fs from "fs";
 
 process.on("message", ({carrier, id})=> {
@@ -19,8 +19,7 @@ const pdfGenerator = (zipPdf:any, shippingInformation:ShippingInformationType[],
     for(const [index, label] of shippingInformation.entries()) {
        res.push(zipPdf.createPdf(label.carrier + index, label.shipment, id));
     }
-    return new Promise((resolve,reject)=>{
-        //here our function should be implemented 
+    return new Promise((resolve,reject)=>{ 
         setTimeout(()=>{
             resolve("done");
         ;} , 5000
