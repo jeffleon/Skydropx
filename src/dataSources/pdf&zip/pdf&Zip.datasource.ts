@@ -4,19 +4,33 @@ import pdf from "html-pdf";
 import { content } from "./pdfTemplate";
 import { ShippingDetailsObject } from "../../controllers/types/shippingInformation";
 import {exec} from "child_process";
-import JSZip from 'jszip';
-import fs from 'fs';
-import { saveAs } from "file-saver";
 import AdmZip from "adm-zip";
 
 
 class ZipPdf implements ZipPdfRepository {
     
+    public async readZip(filepath:string) {
+        try {
+          const zip = new AdmZip(filepath);
+      
+          for (const zipEntry of zip.getEntries()) {
+            console.log(zipEntry.toString());
+          }
+        } catch (e) {
+          console.log(`Something went wrong. ${e}`);
+        }
+    }
+
     public async createZip(requestId: string): Promise<any> {
-        const zip = new AdmZip();
-        const outputFile = `./pdfs/${requestId}.zip`;
-        zip.addLocalFolder("./pdfs");
-        return zip.writeZip(outputFile);
+        try {
+            const zip = new AdmZip();
+            zip.addLocalFolder("./pdfs");
+            var willSendthis = zip.toBuffer();
+            console.info(`create ${requestId}.zip`);
+            return willSendthis;
+        } catch(e) {
+            throw new Error(`Something went wrong. ${e}`);
+        }
     }
 
     private createPdfDirectory(){
@@ -24,11 +38,12 @@ class ZipPdf implements ZipPdfRepository {
     }
     
     public createPdf(name: string, destinationLabel:ShippingDetailsObject, id:string):void{
-        this.createPdfDirectory()
+        this.createPdfDirectory();
         pdf.create(content(destinationLabel)).toFile(`./pdfs/${name}_${id}.pdf`, function(err, res) {
             if (err){
-                throw new Error;
+                throw new Error(`Something went wrong. ${err}`);
             } else {
+                console.info(`generate PDF ${name}_${id}.pdf`);
                 return res;
             }
         });

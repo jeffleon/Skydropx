@@ -11,10 +11,33 @@ class requestLabelSequelize implements LabelRequestRepository {
         return response;
     }
 
+    public async getById(requestId: string): Promise<RequestLabel> {
+        const requestLabel = await RequestLabelModel.findOne({ where: { requestId } });
+        return requestLabel;
+    }
+
     constructor(){
         this.getConection();
     }
     
+    public async updateStatus(requestId: string, status: string): Promise<number> {
+        const [updatedRows] = await RequestLabelModel.update({ status }, {
+            where: {
+                requestId
+            }
+        });
+        return updatedRows;
+    }
+
+    public async updateUrl(requestId: string, url: string): Promise<number> {
+        const [updatedRows] = await RequestLabelModel.update({ urlZip: url }, {
+            where: {
+                requestId
+            }
+        });
+        return updatedRows;
+    }
+
     private async getConection(){
         sequelize.sync({force:false}).then(()=>{
             console.log("Connection Success")

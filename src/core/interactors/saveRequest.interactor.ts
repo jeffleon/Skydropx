@@ -17,6 +17,7 @@ const saveRequest = (labelRequestRepository:LabelRequestRepository) => async (sh
     const resquestLabelPost = await labelRequestRepository.save(requestLabel);
     const childProcess = fork(path.join(__dirname, 'zipPdfGenerator.interactor.ts'));
     childProcess.send({shippingInfo, id});
+    const response = await labelRequestRepository.updateStatus(id, "procesing");
     return  resquestLabelPost;
 }
 

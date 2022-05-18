@@ -4,6 +4,5 @@ import saveRequest from "./saveRequest.interactor";
 
 
 const labelRequestRepository = new RequestLabelSequelize();
-const bucketRepository = new Bucket();
-
+new Bucket();
 export default saveRequest(labelRequestRepository);

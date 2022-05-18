@@ -1,27 +1,29 @@
+import { fork } from "child_process";
+import path from "path";
 import { ShippingInformationType } from "../../controllers/types/shippingInformation";
 import ZipPdf from "../../dataSources/pdf&zip/pdf&Zip.datasource";
 
-process.on("message", ({carrier, id})=> {
-    zipGenerator(carrier, id);
-    process.exit();
+process.on("message", async ({shippingInfo, id})=> {
+    const zipBuffer = await zipGenerator(shippingInfo, id);
+    const childProcess = fork(path.join(__dirname, 'bucketUploadFiles.interactor.ts'));
+    childProcess.send({zipBuffer, id}); 
+    //process.exit();
 });
 
 const zipGenerator = async (shippingInformation:ShippingInformationType[], id: string) => {
     const zipPdf = new ZipPdf();
-    await pdfGenerator(zipPdf, shippingInformation, id);
-    await zipPdf.createZip(id);
+    await pdfGenerator(zipPdf, shippingInformation, id)
+    return zipPdf.createZip(id);
 }
 
-
 const pdfGenerator = (zipPdf:any, shippingInformation:ShippingInformationType[], id:string)=>{
-    let res = []
     for(const [index, label] of shippingInformation.entries()) {
-       res.push(zipPdf.createPdf(label.carrier + index, label.shipment, id));
+       zipPdf.createPdf(label.carrier + index, label.shipment, id);
     }
-    return new Promise((resolve,reject)=>{ 
+    return new Promise((resolve, reject)=>{ 
         setTimeout(()=>{
             resolve("done");
-        ;} , 5000
+        ;} , 1000
         );
     });
 }

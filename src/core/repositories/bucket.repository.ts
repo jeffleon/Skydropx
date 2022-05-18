@@ -1,5 +1,6 @@
 
 
 export default interface BucketRepository {
-    createBucket():Promise<any>;
+    createBucket():void;
+    uploadFile(params:any):void;
 }
