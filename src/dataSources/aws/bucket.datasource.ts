@@ -25,19 +25,17 @@ class Bucket {
             }
         ]
     }
-    constructor(){
-        this.createBucket();
-    }
-
-    public async uploadFile(params:any){  
+    
+    public async uploadFile(params:any):Promise<string>{  
           s3.upload(params, (err:Error) => {
             if (err) console.log("Error in uploading file on s3 due to "+ err);
             else console.info("File successfully uploaded.");
           })
-          return params;
+          const url = `https://${process.env.S3_Bucket}.s3.eu-west-1.amazonaws.com/${params.Key}`;
+          return url;
     }
     
-    private async createBucket(){
+    public async createBucket(){
         var bucketPolicyParams = {Bucket: process.env.S3_Bucket, Policy: JSON.stringify(this.policy)};
         
         s3.createBucket(this.params, function(err, data) {
@@ -53,9 +51,7 @@ class Bucket {
                     }
                 }); 
             }
-        });            
-        return "ok";
-        
+        });              
     }
 }
 

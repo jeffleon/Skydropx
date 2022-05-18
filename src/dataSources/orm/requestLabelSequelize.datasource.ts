@@ -15,10 +15,6 @@ class requestLabelSequelize implements LabelRequestRepository {
         const requestLabel = await RequestLabelModel.findOne({ where: { requestId } });
         return requestLabel;
     }
-
-    constructor(){
-        this.getConection();
-    }
     
     public async updateStatus(requestId: string, status: string): Promise<number> {
         const [updatedRows] = await RequestLabelModel.update({ status }, {
@@ -30,7 +26,7 @@ class requestLabelSequelize implements LabelRequestRepository {
     }
 
     public async updateUrl(requestId: string, url: string): Promise<number> {
-        const [updatedRows] = await RequestLabelModel.update({ urlZip: url }, {
+        const [updatedRows] = await RequestLabelModel.update({ urlZip: url, status: "completed" }, {
             where: {
                 requestId
             }
@@ -38,7 +34,7 @@ class requestLabelSequelize implements LabelRequestRepository {
         return updatedRows;
     }
 
-    private async getConection(){
+    public async getConection(){
         sequelize.sync({force:false}).then(()=>{
             console.log("Connection Success")
           }).catch(error=>{

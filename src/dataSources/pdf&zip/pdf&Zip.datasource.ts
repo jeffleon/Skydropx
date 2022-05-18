@@ -21,11 +21,14 @@ class ZipPdf implements ZipPdfRepository {
         }
     }
 
-    public async createZip(requestId: string): Promise<any> {
+    public async createZip(requestId: string, bufferArray:Buffer[]): Promise<Buffer> {
         try {
             const zip = new AdmZip();
-            zip.addLocalFolder("./pdfs");
+            for (let [index, file] of bufferArray.entries()){
+                zip.addFile(`${requestId +  "_" + index}.pdf`, file);
+            }
             var willSendthis = zip.toBuffer();
+            console.log("file:",willSendthis);
             console.info(`create ${requestId}.zip`);
             return willSendthis;
         } catch(e) {
@@ -33,22 +36,14 @@ class ZipPdf implements ZipPdfRepository {
         }
     }
 
-    private createPdfDirectory(){
-        exec("rm -rf pdfs; mkdir pdfs");
-    }
-    
-    public createPdf(name: string, destinationLabel:ShippingDetailsObject, id:string):void{
-        this.createPdfDirectory();
-        pdf.create(content(destinationLabel)).toFile(`./pdfs/${name}_${id}.pdf`, function(err, res) {
-            if (err){
-                throw new Error(`Something went wrong. ${err}`);
-            } else {
-                console.info(`generate PDF ${name}_${id}.pdf`);
-                return res;
-            }
+    public createPdf(destinationLabel:ShippingDetailsObject):Promise<Buffer>{
+        return new Promise(((resolve, reject) => {
+        pdf.create(content(destinationLabel)).toBuffer((err, buffer) => {
+            if (err !== null) {reject(err);}
+            else {resolve(buffer);}
         });
-    }
-    
+    }))};
+        
 }
 
 export default ZipPdf;
