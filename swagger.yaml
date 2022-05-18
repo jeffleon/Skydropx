@@ -1,27 +1,41 @@
 swagger: "2.0"
 info:
-  description: "Esta es una API que permite el pago de arrendamientos de una serie de inmuebles"
+  description: "Microservice for generate labels"
   version: "0.0.1"
-  title: "API Arrendamiento"
+  title: "Microservice Skydropx Generate Labels"
   contact:
     email: "jeffersonleon1527@gmail.com"
-  host: "localhost:8084"
-  schemes: ["https"]
-basePath: "/api/"
+  host: "localhost:8080"
+basePath: ""
 paths:
-  /api/pagos:
+  /requestLabel/{id}:
     get:
-      summary: lista de arriendos a pagar
-      description: 
-        retorna una lista de objetos que tienen todos los arriendos de los inmuebles a pagar
+      summary: Return the request label by id 
+      description: Return the specifications of request label and her respective status
       produces:
         - "application/json"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Request Id
       responses:
         200:
-          description: OK
-          
+          description: "Status attributes of request labels"
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Request'
+        500:
+          description: "Server Error"
+        404:
+          description: "Not Found"
+
+  /requestLabel:      
     post:
-      summary: "añade un pago a un inmueble especificado por el id del inmueble y el documento de identidad solo se puede pagar en dias impares"
+      summary: "Method for upload zip file with labels in aws"
       consumes:
         - "application/json"
       produces:
@@ -29,36 +43,140 @@ paths:
       parameters:
         - name: "body"
           in: "body"
-          description: "ID of contact to be deleted"
+          description: "Method that create the pdf buffer then use this buffer to create the zip buffer and finally upload this file in aws "
           required: true
           type: "string"
           schema:
-            $ref: "#/definitions/Pago"
+            $ref: "#/definitions/Shipping Information"
       responses:
         200:
-          description: OK
+          description: Status attributes of request labels
+          content:
+            application/json:
+              schema:
+                $ref: '#/definitions/Request'
         500:
           description: "Server Error"
 
 definitions:
-  Pago:
-    type: "object"
-    required:
-    - "name"
-    properties:
-      fechaPago:
-        type: date
-        example: "04/07/2008"
-        description: "debe ser un dia inpar"
-      documentoIdentificacionArrendatario:
-        type: integer
-        example: 1254872552
-      codigoInmueble:
-        type: "string"
-        example: "8872"
-      valorPagado:
-        type: integer
-        example: 1000000
-        description: "valor cancelado de el arrendamiento"
+  Shipping Information:
+    type: "array"
+    items:
+      type: "object"
+      properties:
+        carrier:
+          type: string
+          example: "fake_carrier"
+          description: "carrier name"
+        address_from:
+          type: object
+          properties:
+            name:
+              type: string
+              example: "Fernando López"
+              description: "sender name"
+            street1:
+              type: string
+              example: "Av. Principal #123"
+              description: "sender address"
+            city:
+              type: string
+              example: "Azcapotzalco"
+              description: "sender city"
+            province:
+              type: string
+              example: "Ciudad de México"
+              description: "sender province"
+            postal_code:
+              type: string
+              example: "02900"
+              description: "sender postal code"
+            country_code:
+              type: string
+              example: "MX"
+              description: "country code"     
+        address_to:
+          type: "object"
+          properties:
+            name:
+              type: string
+              example: "Isabel Arredondo"
+              description: "addressee name"
+            street1:
+              type: string
+              example: "Av. Las Torres #123"
+              description: "addressee adress"
+            city:
+              type: string
+              example: "Puebla"
+              description: "addressee city"
+            province:
+              type: string
+              example: "Puebla"
+              description: "addressee province"
+            postal_code:
+              type: string
+              example: "72450"
+              description: "addressee postal_code:"
+            country_code:
+              type: string
+              example: "MX"
+              description: "addressee country code"     
+        parcels:
+          type: "array"
+          items: 
+            type: "object"
+            properties:
+              length:
+                type: integer
+                example: 40
+                description: "length dimension of parcel"
+              width:
+                type: integer
+                example: 40
+                description: "width dimension of parcel"
+              height:
+                type: integer
+                example: 40
+                description: "height dimension of parcel"
+              dimensions_unit:
+                type: string
+                example: "CM"
+                description: "dimensions units"
+              weight:
+                type: integer
+                example: 40
+                description: "weight of parcel"
+              weight_unit:
+                type: string
+                example: "KG"
+                description: "weight units"
     xml:
-      name: "Pago"
+      name: "shipping information"
+  Request:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: "The auto-generated id of request"
+        example: 1
+      status:
+        type: string
+        description: The status of request
+        example: "completed"
+      carrierName:
+        type: string
+        description: Carrier name
+        example: "DHL"
+      finished:
+        type: boolean
+        description: Have you finished reading it?
+        example: "false"
+      requestId:
+        type: string
+        description: unique value to identify the request
+        example: d32da734-254e-4ef9-a4f0-7826a6c381e3
+      urlZip:
+        type: string
+        description: url allowed zip file
+        example: "https://zipfile..."

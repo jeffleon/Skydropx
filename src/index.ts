@@ -4,11 +4,16 @@ import dotEnv from 'dotenv';
 import {createrequestLabelController, getRequestByIdController} from './controllers/requestLabelHttp.controller';
 import requestLabelSequelize from './dataSources/orm/requestLabelSequelize.datasource';
 import Bucket from './dataSources/aws/bucket.datasource';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
+
+const swaggerDocument = YAML.load('./swagger.yaml');
 
 dotEnv.config();
 const PORT = 8080;
 
 const app = express();
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.json());
 
 app.post('/requestLabel', createrequestLabelController);
