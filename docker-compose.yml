@@ -25,8 +25,7 @@ services:
         image: nodejs
         container_name: nodejs
         volumes:
-            - .:/usr/app/
-            - /usr/app/node_modules
+            - .:/usr/src/app/
         restart: unless-stopped
         env_file: .env
         ports:
