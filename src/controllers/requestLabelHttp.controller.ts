@@ -1,12 +1,15 @@
 import { Response, Request } from 'express';
-import saveRequest from '../core/interactors';
-import { ShippingInformationType } from './types/shippingInformation'; "./types/shippingInformation"
+import { saveRequestI, getRequestByIdI } from '../core/interactors';
 
-const createrequestLabelController = async (request:Request, response:Response) => {
+export const createrequestLabelController = async (request:Request, response:Response) => {
     const { body } = request;
-    
-    const requestLabel = await saveRequest(body);
+    const requestLabel = await saveRequestI(body);
     response.status(200).json(requestLabel);
 }
 
-export default createrequestLabelController;
+export const getRequestByIdController = async (request:Request, response:Response) => {
+    const { params } = request;
+    const requestLabel = await getRequestByIdI(params.id);
+    response.status(200).json(requestLabel);
+}
+

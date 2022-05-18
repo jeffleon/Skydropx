@@ -30,6 +30,7 @@
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "6.6.2",
+    "swagger-ui-express": "^4.4.0",
     "uuid": "^8.3.2",
     "zip-lib": "^0.7.3"
   },

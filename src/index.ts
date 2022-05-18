@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotEnv from 'dotenv';
-import createrequestLabelController from './controllers/requestLabelHttp.controller';
+import {createrequestLabelController, getRequestByIdController} from './controllers/requestLabelHttp.controller';
 import requestLabelSequelize from './dataSources/orm/requestLabelSequelize.datasource';
 import Bucket from './dataSources/aws/bucket.datasource';
 
@@ -12,6 +12,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.post('/requestLabel', createrequestLabelController);
+app.get('/requestLabel/:id', getRequestByIdController);
 
 let sequilizeConection = new requestLabelSequelize();
 let bucket = new  Bucket();

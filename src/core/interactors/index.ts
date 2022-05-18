@@ -1,8 +1,9 @@
-import Bucket from "../../dataSources/aws/bucket.datasource";
 import RequestLabelSequelize from "../../dataSources/orm/requestLabelSequelize.datasource";
 import saveRequest from "./saveRequest.interactor";
+import getRequestById from "./getRequestById.interactor";
 
 
 const labelRequestRepository = new RequestLabelSequelize();
 
-export default saveRequest(labelRequestRepository);
+export const saveRequestI = saveRequest(labelRequestRepository);
+export const getRequestByIdI = getRequestById(labelRequestRepository);
