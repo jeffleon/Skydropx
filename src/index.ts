@@ -19,8 +19,8 @@ app.use(bodyParser.json());
 app.post('/requestLabel', createrequestLabelController);
 app.get('/requestLabel/:id', getRequestByIdController);
 
-let sequilizeConection = new requestLabelSequelize();
-let bucket = new  Bucket();
+const sequilizeConection = new requestLabelSequelize();
+const bucket = new  Bucket();
 sequilizeConection.getConection();
 bucket.createBucket();
 

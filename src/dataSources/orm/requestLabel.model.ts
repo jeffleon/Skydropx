@@ -1,5 +1,5 @@
 import {Model, DataTypes } from 'sequelize';
-import RequestLabel from '../../core/entities/RequestLabel'; 
+import RequestLabel from '../../core/entities/RequestLabel';
 import sequelize from './config';
 
 
@@ -9,7 +9,7 @@ class RequestLabelModel extends Model<RequestLabel> implements RequestLabel {
     requestId!: string;
     urlZip!: string | null;
   }
-  
+
   RequestLabelModel.init(
     {
       status: {

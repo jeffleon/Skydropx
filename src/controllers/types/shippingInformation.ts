@@ -16,7 +16,7 @@ export interface AddressI {
     province: string;
     postal_code: string;
     country_code: string;
-} 
+}
 
 export interface ParcelsI {
     length: number;

@@ -15,7 +15,7 @@ class requestLabelSequelize implements LabelRequestRepository {
         const requestLabel = await RequestLabelModel.findOne({ where: { requestId } });
         return requestLabel;
     }
-    
+
     public async updateStatus(requestId: string, status: string): Promise<number> {
         const [updatedRows] = await RequestLabelModel.update({ status }, {
             where: {
