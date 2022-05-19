@@ -13,7 +13,7 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 dotEnv.config();
 const PORT = 8080;
 
-const app = express();
+export const app = express();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.json());
 
