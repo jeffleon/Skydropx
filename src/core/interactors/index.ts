@@ -1,6 +1,6 @@
 import RequestLabelSequelize from "../../dataSources/orm/requestLabelSequelize.datasource";
-import saveRequest from "./saveRequest.interactor";
-import getRequestById from "./getRequestById.interactor";
+import saveRequest from "./requestLabel/create/saveRequest.interactor";
+import getRequestById from "./requestLabel/get/getRequestById.interactor";
 
 
 const labelRequestRepository = new RequestLabelSequelize();

@@ -1,9 +1,7 @@
-import { fork } from "child_process";
-import path from "path";
-import Bucket from "../../dataSources/aws/bucket.datasource";
-import { ShippingInformationType } from "../../controllers/types/shippingInformation";
-import ZipPdf from "../../dataSources/pdf&zip/pdf&Zip.datasource";
-import requestLabelSequelize from "../../dataSources/orm/requestLabelSequelize.datasource";
+import Bucket from "../../../../dataSources/aws/bucket.datasource";
+import { ShippingInformationType } from "../../../../controllers/types/shippingInformation";
+import ZipPdf from "../../../../dataSources/pdf&zip/pdf&Zip.datasource";
+import requestLabelSequelize from "../../../../dataSources/orm/requestLabelSequelize.datasource";
 
 process.on("message", async ({shippingInfo, id})=> {
     const zipBuffer = await zipGenerator(shippingInfo, id);

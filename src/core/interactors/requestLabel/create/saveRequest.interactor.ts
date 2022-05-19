@@ -1,9 +1,9 @@
-import RequestLabel from "../entities/RequestLabel";
+import RequestLabel from "../../../entities/RequestLabel";
 import { v4 as uuid } from 'uuid';
-import LabelRequestRepository from "../repositories/labelRequest.repository";
+import LabelRequestRepository from "../../../repositories/labelRequest.repository";
 import { fork } from "child_process";
 import path from "path";
-import { ShippingInformationType } from "../../controllers/types/shippingInformation";
+import { ShippingInformationType } from "../../../../controllers/types/shippingInformation";
 
 
 const saveRequest = (labelRequestRepository:LabelRequestRepository) => async (shippingInfo:ShippingInformationType[]) => {
@@ -23,7 +23,7 @@ const saveRequest = (labelRequestRepository:LabelRequestRepository) => async (sh
     };
     try {
         const resquestLabelPost = await labelRequestRepository.save(requestLabel);
-        const childProcess = fork(path.join(__dirname, 'zipPdfGenerator.interactor.ts'));
+        const childProcess = fork(path.join(__dirname, '..', '..', 'zipPdf', 'create', 'zipPdfGenerator.interactor.ts'));
         childProcess.send({shippingInfo, id});
         const response = await labelRequestRepository.updateStatus(id, "procesing");
         return  resquestLabelPost;
