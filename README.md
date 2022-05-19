@@ -5,10 +5,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="250" height="80">
+    <img src="images/logo.png" alt="Logo" width="250" height="60">
   </a>
 
-  <h3 align="center">SkyDropx</h3>
+  <h3 align="center">API Request Labels</h3>
 
   <p align="center">
     An awesome Microservices request labels
