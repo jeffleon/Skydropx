@@ -1,29 +1,4 @@
 <div id="top"></div>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 
 
 <!-- PROJECT LOGO -->
@@ -81,7 +56,6 @@ The input for this microservice is an array with the specifications of where you
 
 NOTE: these three steps are performed from a subprocess because this process needs to be asynchronous and could block the api, this is why a subprocess is launched to perform these 3 steps.
 
-Translated with www.DeepL.com/Translator (free version)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -137,7 +111,7 @@ _Below is an example of how you can install and setting up The app._
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-If you have any issue or if you need something see the documentation of API in the endpoint
+If you have any issue or if you need something see the documentation of API in the endpoint http://localhost:8080/api-docs
 
 <div align="center">
     <img src="images/swagger.png" alt="Logo">
