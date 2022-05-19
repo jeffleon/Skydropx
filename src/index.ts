@@ -6,6 +6,7 @@ import requestLabelSequelize from './dataSources/orm/requestLabelSequelize.datas
 import Bucket from './dataSources/aws/bucket.datasource';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
+import router from './routes';
 
 const swaggerDocument = YAML.load('./swagger.yaml');
 
@@ -16,8 +17,8 @@ const app = express();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(bodyParser.json());
 
-app.post('/requestLabel', createrequestLabelController);
-app.get('/requestLabel/:id', getRequestByIdController);
+app.use('/', router);
+
 
 const sequilizeConection = new requestLabelSequelize();
 const bucket = new  Bucket();

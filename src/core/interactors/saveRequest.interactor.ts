@@ -8,9 +8,16 @@ import { ShippingInformationType } from "../../controllers/types/shippingInforma
 
 const saveRequest = (labelRequestRepository:LabelRequestRepository) => async (shippingInfo:ShippingInformationType[]) => {
     const id: string = uuid();
+    let carrierName: string = "";
+    
+    if (shippingInfo && Array.isArray(shippingInfo) && shippingInfo.length > 0 && shippingInfo[0].hasOwnProperty('carrier')){
+        carrierName = shippingInfo[0].carrier;
+    } else {
+        carrierName = "Dont specify";
+    }
     const requestLabel: RequestLabel = {
         status: "pending",
-        carrierName: "servientrega",
+        carrierName,
         requestId: id,
         urlZip: "",
     };
