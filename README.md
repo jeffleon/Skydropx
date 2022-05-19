@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="200" height="80">
+    <img src="images/logo.png" alt="Logo" width="250" height="80">
   </a>
 
   <h3 align="center">SkyDropx</h3>
@@ -68,8 +68,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 This is a microservice developed with hexagonal architecture which aims to generate travel labels, made for the company Skydropx, this process was divided into three parts to be handled in a simpler way.
 
@@ -139,9 +137,11 @@ _Below is an example of how you can install and setting up The app._
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+If you have any issue or if you need something see the documentation of API in the endpoint
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+<div align="center">
+    <img src="images/swagger.png" alt="Logo">
+</div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
