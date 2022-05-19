@@ -8,7 +8,7 @@ export const content = (shippingInfo: ShippingDetailsObject) => {
     };
 
     if (!shippingInfo){
-        return "";
+        return `<h1> Not content found </h4>`;
     }
 
     if (!shippingInfo.hasOwnProperty('address_from')){
