@@ -1,6 +1,6 @@
-import { ShippingDetailsObject, ShippingInformationType } from "../controllers/types/shippingInformation";
+import { ShippingDetailsObject } from "../controllers/types/shippingInformation";
 import ZipPdf from "../dataSources/pdf&zip/pdf&Zip.datasource";
-import { shippingObject, shippingObject1, shippingObject2, shippingWithoutAdressFrom, shippingWithoutAdressTo, shippingWithoutAdressToParcel } from "../test/types/shipingobject"
+import { shippingObject, shippingObject1, shippingObject2, shippingWithoutAdressFrom, shippingWithoutAdressTo, shippingWithoutAdressToParcel } from "./types/shipingobject"
 
 
 describe('create PDF function', ()=>{

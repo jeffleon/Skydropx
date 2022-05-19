@@ -10,8 +10,11 @@ class ZipPdf implements ZipPdfRepository {
     public async createZip(requestId: string, bufferArray:Buffer[]): Promise<Buffer> {
         try {
             const zip = new AdmZip();
-            for (let [index, file] of bufferArray.entries()){
-                zip.addFile(`${requestId +  "_" + index}.pdf`, file);
+            if (bufferArray) {
+                console.log("entre al zip", bufferArray);
+                for (let [index, file] of bufferArray.entries()) {
+                    zip.addFile(`${requestId +  "_" + index}.pdf`, file);
+                }
             }
             var willSendthis = zip.toBuffer();
             console.log("file:",willSendthis);
