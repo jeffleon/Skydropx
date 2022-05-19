@@ -26,6 +26,12 @@ class Bucket {
         ]
     }
 
+    /**
+     * Function that upload the zip file in a aws Bucket 
+     * return the url to download the pdf
+     * @param params 
+     * @returns Promise<string>
+     */
     public async uploadFile(params:any):Promise<string>{
           s3.upload(params, (err:Error) => {
             if (err) throw new Error(`Something when wrong upload file ${err}`);
@@ -35,6 +41,9 @@ class Bucket {
           return url;
     }
 
+    /**
+     * Function that inicialize the bucket with policy to become the bucket in a public bucket
+     */
     public async createBucket(){
         let bucketPolicyParams = {Bucket: process.env.S3_Bucket, Policy: JSON.stringify(this.policy)};
 

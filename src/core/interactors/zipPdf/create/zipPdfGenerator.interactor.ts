@@ -10,7 +10,12 @@ process.on("message", async ({shippingInfo, id})=> {
     //process.exit();
 });
 
-const uploadZip = async (zipBuffer:any, id:string) => {
+/**
+ * Get an array Buffer and call the method that upload this buffer in S3 aws
+ * @param zipBuffer 
+ * @param id 
+ */
+export const uploadZip = async (zipBuffer:any, id:string) => {
     const bucket = new Bucket();
     const requestlabel = new requestLabelSequelize();
     const buffer = Buffer.from(zipBuffer);
@@ -23,7 +28,15 @@ const uploadZip = async (zipBuffer:any, id:string) => {
     requestlabel.updateUrl(id, result);
 }
 
-const zipGenerator = async (shippingInformation:ShippingInformationType[], id: string) => {
+/**
+ * Get the shipping information with this data call the method to create a buffer of Pdfs 
+ * and then call the method to create the zip buffer 
+ * return the zip buffer
+ * @param shippingInformation 
+ * @param id 
+ * @returns Buffer
+ */
+export const zipGenerator = async (shippingInformation:ShippingInformationType[], id: string) => {
     const zipPdf = new ZipPdf();
     const bufferArray = await pdfGenerator(zipPdf, shippingInformation, id);
     console.log("Create pdf buffer!!");
@@ -31,7 +44,15 @@ const zipGenerator = async (shippingInformation:ShippingInformationType[], id: s
     return bufferZip
 }
 
-const pdfGenerator = async(zipPdf:any, shippingInformation:ShippingInformationType[], id:string)=>{
+/**
+ * This function call the method to create the buffer whit the Pdfs
+ * return the buffer PDfs
+ * @param zipPdf 
+ * @param shippingInformation 
+ * @param id 
+ * @returns Buffer
+ */
+export const pdfGenerator = async(zipPdf:ZipPdf, shippingInformation:ShippingInformationType[], id:string)=>{
     const bufferArray = [];
     for(const label of shippingInformation) {
         bufferArray.push(await zipPdf.createPdf(label.shipment)); 

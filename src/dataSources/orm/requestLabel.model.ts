@@ -2,7 +2,9 @@ import {Model, DataTypes } from 'sequelize';
 import RequestLabel from '../../core/entities/RequestLabel';
 import sequelize from './config';
 
-
+/**
+ * Sequelize model inicialization
+ */
 class RequestLabelModel extends Model<RequestLabel> implements RequestLabel {
     status!: string;
     carrierName!: string;

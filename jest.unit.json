@@ -4,6 +4,9 @@
     "testMatch": [
         "**/?(*.)+(spec).ts"
     ],
+    "transform": {
+        "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest"
+      },
     "resetMocks": true,
     "clearMocks": true
 }

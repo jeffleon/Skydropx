@@ -1,5 +1,11 @@
 import { ShippingDetailsObject, AddressI, ParcelsI } from "../../controllers/types/shippingInformation";
 
+/**
+ * Create the content of pdf
+ * return the HTML content
+ * @param shippingInfo 
+ * @returns HTML
+ */
 export const content = (shippingInfo: ShippingDetailsObject) => {
 
     const emptyObjectAdess = { 

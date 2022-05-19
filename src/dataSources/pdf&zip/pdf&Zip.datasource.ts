@@ -6,7 +6,13 @@ import AdmZip from "adm-zip";
 
 
 class ZipPdf implements ZipPdfRepository {
-    
+    /**
+     * This function create the Zip Buffer
+     * return the buffer
+     * @param requestId 
+     * @param bufferArray 
+     * @returns Promise<Buffer>
+     */
     public async createZip(requestId: string, bufferArray:Buffer[]): Promise<Buffer> {
         try {
             const zip = new AdmZip();
@@ -25,6 +31,12 @@ class ZipPdf implements ZipPdfRepository {
         }
     }
 
+    /**
+     * This function create the Buffer Pdf
+     * return this Buffer
+     * @param destinationLabel 
+     * @returns Promise<Buffer>
+     */
     public createPdf(destinationLabel:ShippingDetailsObject):Promise<Buffer>{
         return new Promise(((resolve, reject) => {
         pdf.create(content(destinationLabel)).toBuffer((err, buffer) => {

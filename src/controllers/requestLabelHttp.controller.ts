@@ -1,6 +1,12 @@
 import { Response, Request } from 'express';
 import { saveRequestI, getRequestByIdI } from '../core/interactors';
 
+/**
+ * send the body for do a request with an array of labels if save the request the response is 
+ * an object with the status of request if its not return a 500 with the error
+ * @param request  
+ * @param response
+ */
 export const createrequestLabelController = async (request:Request, response:Response) => {
     const { body } = request;
     try {
@@ -11,6 +17,12 @@ export const createrequestLabelController = async (request:Request, response:Res
     }
 }
 
+/**
+ * send a id and look for this specific request and if find someone return it, if its not
+ * return and 404 and if fails return a 500
+ * @param request 
+ * @param response 
+ */
 export const getRequestByIdController = async (request:Request, response:Response) => {
     const { params } = request;
     try {

@@ -6,6 +6,13 @@ import sequelize from "./config";
 
 
 class requestLabelSequelize implements LabelRequestRepository {
+
+    /**
+     * This funtion interact with ORM for save a request label 
+     * return the object created
+     * @param request 
+     * @returns Promise<RequestLabel>
+     */
     public async save(request: RequestLabel): Promise<RequestLabel> {
         try {
             const response = await RequestLabelModel.create(request);
@@ -15,6 +22,12 @@ class requestLabelSequelize implements LabelRequestRepository {
         }
     }
 
+    /**
+     * This funtion interact with ORM find a request with a specific id
+     * return the request found
+     * @param requestId 
+     * @returns Promise<RequestLabel>
+     */
     public async getById(requestId: string): Promise<RequestLabel> {
         try {
             const requestLabel = await RequestLabelModel.findOne({ where: { requestId } });
@@ -24,6 +37,13 @@ class requestLabelSequelize implements LabelRequestRepository {
         }
     }
 
+    /**
+     * This method interact with ORM to update the status of request label
+     * return the number of rows changed
+     * @param requestId 
+     * @param status 
+     * @returns Promise<number>
+     */
     public async updateStatus(requestId: string, status: string): Promise<number> {
         try{
             const [updatedRows] = await RequestLabelModel.update({ status }, {
@@ -37,6 +57,13 @@ class requestLabelSequelize implements LabelRequestRepository {
         }
     }
 
+    /**
+     * This function update the url that contains the zip file
+     * return the number of rows changed
+     * @param requestId 
+     * @param url 
+     * @returns Promise<number>
+     */
     public async updateUrl(requestId: string, url: string): Promise<number> {
         try{
             const [updatedRows] = await RequestLabelModel.update({ urlZip: url, status: "completed" }, {
@@ -50,6 +77,9 @@ class requestLabelSequelize implements LabelRequestRepository {
         }  
     }
 
+    /**
+     * This method sync the sequilize object conection with a model
+     */
     public async getConection(){
         sequelize.sync({force:false}).then(()=>{
             console.log("Connection Success")
