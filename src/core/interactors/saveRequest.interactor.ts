@@ -14,11 +14,15 @@ const saveRequest = (labelRequestRepository:LabelRequestRepository) => async (sh
         requestId: id,
         urlZip: "",
     };
-    const resquestLabelPost = await labelRequestRepository.save(requestLabel);
-    const childProcess = fork(path.join(__dirname, 'zipPdfGenerator.interactor.ts'));
-    childProcess.send({shippingInfo, id});
-    const response = await labelRequestRepository.updateStatus(id, "procesing");
-    return  resquestLabelPost;
+    try {
+        const resquestLabelPost = await labelRequestRepository.save(requestLabel);
+        const childProcess = fork(path.join(__dirname, 'zipPdfGenerator.interactor.ts'));
+        childProcess.send({shippingInfo, id});
+        const response = await labelRequestRepository.updateStatus(id, "procesing");
+        return  resquestLabelPost;
+    } catch(error){
+        throw new Error(`save request interactor fails ${error}`)
+    }
 }
 
 export default saveRequest;

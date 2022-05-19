@@ -1,20 +1,44 @@
-import { ShippingDetailsObject } from "../../controllers/types/shippingInformation";
+import { ShippingDetailsObject, AddressI, ParcelsI } from "../../controllers/types/shippingInformation";
 
 export const content = (shippingInfo: ShippingDetailsObject) => {
+
+    const emptyObjectAdess = { 
+        name: "", city: "", country_code: "", 
+        postal_code: "", street1: "" , province: ""
+    };
+
+    if (!shippingInfo){
+        return "";
+    }
+
+    if (!shippingInfo.hasOwnProperty('address_from')){
+        shippingInfo.address_from = emptyObjectAdess;
+    }
+
+    if (!shippingInfo.hasOwnProperty('address_to')){
+        shippingInfo.address_from = emptyObjectAdess;
+    }
+
+    if (!shippingInfo.hasOwnProperty('parcels')){
+        shippingInfo.parcels = [];
+    }
 
     const { address_from, address_to, parcels } = shippingInfo;
 
     let tablecontent = "";
 
-    parcels.forEach((parcel) => {
-        tablecontent += `
-        <tr>
-            <td>${parcel.weight} ${parcel.weight_unit}</td>
-            <td>${parcel.length}</td>
-            <td>${parcel.height}</td>
-        </tr>
-        `
-    })
+
+    if (parcels && Array.isArray(parcels) && parcels.length > 0){
+        parcels.forEach((parcel) => {
+            tablecontent += `
+            <tr>
+                <td>${parcel?.weight || 0} ${parcel?.weight_unit || ""}</td>
+                <td>${parcel?.length || 0}</td>
+                <td>${parcel?.height || 0}</td>
+            </tr>
+            `
+        });
+    }
 
     return `
         <!doctype html>
@@ -49,17 +73,17 @@ export const content = (shippingInfo: ShippingDetailsObject) => {
                     <div id="pageHeader" style="border-bottom: 1px solid #ddd; padding-bottom: 1px;">
                         <p>SkyDrops</p>
                     </div>
-                    <h1>${address_from.name}</h4>
-                    <h4>${address_from.city}</h4>
-                    <h4>${address_from.country_code}</h4>
-                    <h4>${address_from.postal_code}</h4>
-                    <h4>${address_from.street1}</h4>
+                    <h1>${address_from?.name || ""}</h4>
+                    <h4>${address_from?.city || ""}</h4>
+                    <h4>${address_from?.country_code || ""}</h4>
+                    <h4>${address_from?.postal_code || ""}</h4>
+                    <h4>${address_from?.street1 || ""}</h4>
                     <h1>--------------------------------------</h1>
-                    <h1>${address_to.name}</h1>
-                    <h4>${address_to.city}</h4>
-                    <h4>${address_to.country_code}</h4>
-                    <h4>${address_to.province}</h4>
-                    <h4>${address_to.street1}</h4>
+                    <h1>${address_to?.name || ""}</h1>
+                    <h4>${address_to?.city || ""}</h4>
+                    <h4>${address_to?.country_code || ""}</h4>
+                    <h4>${address_to?.province || ""}</h4>
+                    <h4>${address_to?.street1 || ""}</h4>
                     <h1>--------------------------------------</h1>
                     <h2>Parcels</h2>
                     <table>

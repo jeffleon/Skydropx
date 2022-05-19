@@ -28,7 +28,7 @@ class Bucket {
 
     public async uploadFile(params:any):Promise<string>{
           s3.upload(params, (err:Error) => {
-            if (err) console.log("Error in uploading file on s3 due to "+ err);
+            if (err) throw new Error(`Something when wrong upload file ${err}`);
             else console.info("File successfully uploaded.");
           })
           const url = `https://${process.env.S3_Bucket}.s3.eu-west-1.amazonaws.com/${params.Key}`;
@@ -40,12 +40,12 @@ class Bucket {
 
         s3.createBucket(this.params, function(err, data) {
             if (err && err.statusCode == 409){
-                console.log("Bucket has been created already");
+                console.info("Bucket has been created already");
             }
             else {
                 s3.putBucketPolicy(bucketPolicyParams, function(err, data) {
                     if (err) {
-                        console.log("Error", err);
+                        throw new Error(`Something when wrong add policy ${err}`);
                     } else {
                         console.info(`Bucket ${process.env.S3_Bucket} Created Successfull with policy`);
                     }
