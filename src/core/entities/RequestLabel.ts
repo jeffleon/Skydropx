@@ -3,4 +3,5 @@ export default interface RequestLabel {
     carrierName: string;
     requestId: string;
     urlZip: string;
+    token?:string;
 }

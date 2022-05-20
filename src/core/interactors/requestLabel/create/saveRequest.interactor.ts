@@ -4,6 +4,8 @@ import LabelRequestRepository from "../../../repositories/labelRequest.repositor
 import { fork } from "child_process";
 import path from "path";
 import { ShippingInformationType } from "../../../../types/shippingInformation";
+import Jwt from "../../../../dataSources/jwt/jwt.datasource";
+import JwtRepository from "../../../repositories/jwt.repository";
 
 /**
  * This interactor inyect the dependencies of a labelRequestRepository then call the method 
@@ -15,25 +17,28 @@ import { ShippingInformationType } from "../../../../types/shippingInformation";
  * @return 
  * @returns Promise<RequestLabel> | Error
  */
-const saveRequest = (labelRequestRepository:LabelRequestRepository) => async (shippingInfo:ShippingInformationType[]) => {
+const saveRequest = (labelRequestRepository:LabelRequestRepository, jwt:JwtRepository) => async (shippingInfo:ShippingInformationType[]) => {
     const id: string = uuid();
     let carrierName: string = "";
     
     if (shippingInfo && Array.isArray(shippingInfo) && shippingInfo.length > 0 && shippingInfo[0].hasOwnProperty('carrier')){
         carrierName = shippingInfo[0].carrier;
     } else {
-        carrierName = "Dont specify";
+        throw new Error(`specify the carrier`);
     }
+
+    const token = jwt.createToken(carrierName, id);
     const requestLabel: RequestLabel = {
         status: "pending",
         carrierName,
         requestId: id,
         urlZip: "",
+        token
     };
     try {
         const resquestLabelPost = await labelRequestRepository.save(requestLabel);
-        const childProcess = fork(path.join(__dirname, '..', '..', 'zipPdf', 'create', 'zipPdfGenerator.interactor.ts'));
-        childProcess.send({shippingInfo, id});
+        //const childProcess = fork(path.join(__dirname, '..', '..', 'zipPdf', 'create', 'zipPdfGenerator.interactor.ts'));
+        //childProcess.send({shippingInfo, id});
         const response = await labelRequestRepository.updateStatus(id, "procesing");
         return  resquestLabelPost;
     } catch(error){

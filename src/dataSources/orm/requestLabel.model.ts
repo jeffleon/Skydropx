@@ -10,6 +10,7 @@ class RequestLabelModel extends Model<RequestLabel> implements RequestLabel {
     carrierName!: string;
     requestId!: string;
     urlZip!: string | null;
+    token!: string | null;
   }
 
   RequestLabelModel.init(
@@ -28,6 +29,10 @@ class RequestLabelModel extends Model<RequestLabel> implements RequestLabel {
       },
       urlZip: {
         type: new DataTypes.STRING(128),
+        allowNull: true,
+      },
+      token: {
+        type: new DataTypes.STRING(256),
         allowNull: true,
       }
     },
