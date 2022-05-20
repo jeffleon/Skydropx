@@ -11,5 +11,5 @@ const bucket = new Bucket();
 const jwt = new Jwt();
 
 export const saveRequestI = saveRequest(labelRequestRepository, jwt);
-export const getRequestByIdI = getRequestById(labelRequestRepository);
-export const downloadFileI = downloadFile(bucket, labelRequestRepository);
+export const getRequestByIdI = getRequestById(labelRequestRepository, jwt);
+export const downloadFileI = downloadFile(bucket);

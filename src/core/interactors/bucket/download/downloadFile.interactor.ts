@@ -1,6 +1,7 @@
 import LabelRequestRepository from "../../../repositories/labelRequest.repository";
 import BucketRepository from "../../../repositories/bucket.repository"
 import RequestLabel from "../../../entities/RequestLabel";
+import {getRequestByIdI} from "../../index";
 
 /**
  * Interactor call the method download zip file 
@@ -9,9 +10,9 @@ import RequestLabel from "../../../entities/RequestLabel";
  * @returns 
  */
 
-const downloadFile = (bucket:BucketRepository,labelRequest:LabelRequestRepository) =>async (id:string)=>{
-    const request:RequestLabel = await labelRequest.getById(id);
-    if (request){
+const downloadFile = (bucket:BucketRepository) =>async (id:string, token:string)=>{
+    const request:RequestLabel = await getRequestByIdI(id, token);
+    if (request && !(request instanceof Error)){
         if (request?.status && request.status === "completed") {
             var s3Params = {
                 Bucket: process.env.S3_Bucket,

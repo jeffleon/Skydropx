@@ -8,14 +8,19 @@ import {downloadFileI } from "../../core/interactors"
  * @param response 
  */
 export const downloadFileController = async(request:Request, response:Response) => {
-    const {params} = request
+    const {params, headers} = request
     try {
-        const res = await downloadFileI(params.id);
-        if (!res){
-            response.status(404).json({"message": "dont find request or not is complete yet", "status": 404})
-        } 
-        response.attachment(`${params.id}.zip`);
-        res.pipe(response);
+        if (headers && headers?.authorization && params?.id) {
+            const res = await downloadFileI(params.id, headers?.authorization);
+            if (!res){
+                response.status(404).json({"message": "dont find request or not is complete yet", "status": 404})
+            } else {
+                response.attachment(`${params.id}.zip`);
+                res.pipe(response);
+            } 
+        } else{
+            response.status(400).json({"error": "you dont have autorization", "status": 400});
+        }
     }catch(e){
         response.status(500).json({"error":`Something goes wrong ${e}`, "status": 500});
     }

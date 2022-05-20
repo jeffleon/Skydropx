@@ -18,6 +18,18 @@ class Jwt implements JwtRepository {
         }
         throw new Error(`Carrier and id expected`);
     }
+
+    public verifyToken(token:string):any{
+        if (token){
+            try {
+                const verification = jwt.verify(token, process.env.TOKEN_KEY);
+                return verification;
+            } catch(error){
+                throw new Error(`Token verification fails`);
+            }
+        }
+        throw new Error(`Token is needed`);
+    }
 }
 
 export default Jwt

@@ -8,10 +8,18 @@ import { saveRequestI, getRequestByIdI } from '../../core/interactors';
  * @param response
  */
 export const createrequestLabelController = async (request:Request, response:Response) => {
-    const { body } = request;
+    const { body, params } = request;
+    
+    if(params && Object.keys(params).length > 0){
+        Promise.reject(response.status(500).json({"error": "method is not allowed", "status": 500})); 
+    }
     try {
-        const requestLabel = await saveRequestI(body);
-        response.status(200).json(requestLabel);
+        if(body && Array.isArray(body) &&  body.length > 0) {
+            const requestLabel = await saveRequestI(body);
+            response.status(200).json(requestLabel);
+        } else{
+            response.status(500).json({"error": "Invalid data", "status": 500});
+        }
     }catch(error){
         response.status(500).json({"error": error, "status": 500});
     }
@@ -24,13 +32,18 @@ export const createrequestLabelController = async (request:Request, response:Res
  * @param response 
  */
 export const getRequestByIdController = async (request:Request, response:Response) => {
-    const { params } = request;
+    const { params, headers } = request;
     try {
-        const requestLabel = await getRequestByIdI(params.id);
-        if (!requestLabel){
-            response.status(404).json({"error": "request not found", "status": 404});
-        } 
-        response.status(200).json(requestLabel);
+        if (headers && headers?.authorization && params?.id){
+            const requestLabel = await getRequestByIdI(params.id, headers.authorization);
+            if (!requestLabel){
+                response.status(404).json({"error": "request not found", "status": 404});
+            } else {
+                response.status(200).json(requestLabel);
+            }
+        } else{
+            response.status(400).json({"error": "you dont have autorization", "status": 400});
+        }
     }catch(error) {
         response.status(500).json({"error": `Something goes wrong ${error}`, status: 500 });
     }

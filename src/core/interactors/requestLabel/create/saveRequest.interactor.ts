@@ -4,7 +4,6 @@ import LabelRequestRepository from "../../../repositories/labelRequest.repositor
 import { fork } from "child_process";
 import path from "path";
 import { ShippingInformationType } from "../../../../types/shippingInformation";
-import Jwt from "../../../../dataSources/jwt/jwt.datasource";
 import JwtRepository from "../../../repositories/jwt.repository";
 
 /**
@@ -37,8 +36,8 @@ const saveRequest = (labelRequestRepository:LabelRequestRepository, jwt:JwtRepos
     };
     try {
         const resquestLabelPost = await labelRequestRepository.save(requestLabel);
-        //const childProcess = fork(path.join(__dirname, '..', '..', 'zipPdf', 'create', 'zipPdfGenerator.interactor.ts'));
-        //childProcess.send({shippingInfo, id});
+        const childProcess = fork(path.join(__dirname, '..', '..', 'zipPdf', 'create', 'zipPdfGenerator.interactor.ts'));
+        childProcess.send({shippingInfo, id});
         const response = await labelRequestRepository.updateStatus(id, "procesing");
         return  resquestLabelPost;
     } catch(error){
