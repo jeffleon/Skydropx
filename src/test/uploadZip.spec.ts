@@ -1,6 +1,6 @@
 import {zipGenerator, pdfGenerator} from "../core/interactors/zipPdf/create/zipPdfGenerator.interactor";
 import { shippingType, shippingType1 } from "./test objects/shippinType";
-import { ShippingInformationType } from "../controllers/types/shippingInformation";
+import { ShippingInformationType } from "../types/shippingInformation";
 
 
 describe('create PDF function', ()=>{

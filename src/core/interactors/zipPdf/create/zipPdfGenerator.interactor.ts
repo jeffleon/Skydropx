@@ -1,5 +1,5 @@
 import Bucket from "../../../../dataSources/aws/bucket.datasource";
-import { ShippingInformationType } from "../../../../controllers/types/shippingInformation";
+import { ShippingInformationType } from "../../../../types/shippingInformation";
 import ZipPdf from "../../../../dataSources/pdf&zip/pdf&Zip.datasource";
 import requestLabelSequelize from "../../../../dataSources/orm/requestLabelSequelize.datasource";
 

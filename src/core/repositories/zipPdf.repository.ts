@@ -1,4 +1,4 @@
-import { ShippingDetailsObject } from "../../controllers/types/shippingInformation";
+import { ShippingDetailsObject } from "../../types/shippingInformation";
 
 /**
  * signatures of Zip PDF Repository

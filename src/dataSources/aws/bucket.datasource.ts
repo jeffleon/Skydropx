@@ -41,7 +41,7 @@ class Bucket {
           return url;
     }
     /**
-     * get object of id
+     * get file for the param key 
      * @param params
      */
     public async downloadFile(params:any) {

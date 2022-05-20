@@ -3,16 +3,16 @@ import { v4 as uuid } from 'uuid';
 import LabelRequestRepository from "../../../repositories/labelRequest.repository";
 import { fork } from "child_process";
 import path from "path";
-import { ShippingInformationType } from "../../../../controllers/types/shippingInformation";
+import { ShippingInformationType } from "../../../../types/shippingInformation";
 
 /**
  * This interactor inyect the dependencies of a labelRequestRepository then call the method 
  * to save the request label and begin a subprocess 
  * to create the zip file also update the state of requests
  * return the request created
- * @param labelRequestRepository 
- * @return
- * @param shippingInfo 
+ * @param labelRequestRepository
+ * @param shippingInfo
+ * @return 
  * @returns Promise<RequestLabel> | Error
  */
 const saveRequest = (labelRequestRepository:LabelRequestRepository) => async (shippingInfo:ShippingInformationType[]) => {

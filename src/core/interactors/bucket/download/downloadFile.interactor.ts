@@ -2,7 +2,12 @@ import LabelRequestRepository from "../../../repositories/labelRequest.repositor
 import BucketRepository from "../../../repositories/bucket.repository"
 import RequestLabel from "../../../entities/RequestLabel";
 
-
+/**
+ * Interactor call the method download zip file 
+ * @param bucket 
+ * @param labelRequest 
+ * @returns 
+ */
 
 const downloadFile = (bucket:BucketRepository,labelRequest:LabelRequestRepository) =>async (id:string)=>{
     const request:RequestLabel = await labelRequest.getById(id);
@@ -13,7 +18,6 @@ const downloadFile = (bucket:BucketRepository,labelRequest:LabelRequestRepositor
                 Key: `${id}.zip`
             };
             const res = await bucket.downloadFile(s3Params);
-            console.log("response:", res);
             return res;
         } 
         return null;

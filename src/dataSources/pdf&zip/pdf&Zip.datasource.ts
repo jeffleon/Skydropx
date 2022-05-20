@@ -1,7 +1,7 @@
 import ZipPdfRepository from "../../core/repositories/zipPdf.repository";
 import pdf from "html-pdf";
 import { content } from "./pdfTemplate";
-import { ShippingDetailsObject } from "../../controllers/types/shippingInformation";
+import { ShippingDetailsObject } from "../../types/shippingInformation";
 import AdmZip from "adm-zip";
 
 

@@ -1,4 +1,4 @@
-import { ShippingDetailsObject, AddressI, ParcelsI } from "../../controllers/types/shippingInformation";
+import { ShippingDetailsObject } from "../../types/shippingInformation";
 
 /**
  * Create the content of pdf
