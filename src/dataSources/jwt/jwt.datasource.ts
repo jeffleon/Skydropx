@@ -3,6 +3,13 @@ import JwtRepository from "../../core/repositories/jwt.repository";
 
 
 class Jwt implements JwtRepository {
+    
+    /**
+     * Create token with carrierName and requestId
+     * @param carrier 
+     * @param id 
+     * @returns 
+     */
     public createToken(carrier:string, id:string):string{
         if (carrier && id){
             const token = jwt.sign(
@@ -19,6 +26,11 @@ class Jwt implements JwtRepository {
         throw new Error(`Carrier and id expected`);
     }
 
+    /**
+     * Verify the token
+     * @param token
+     * @returns 
+     */
     public verifyToken(token:string):any{
         if (token){
             try {

@@ -10,7 +10,7 @@ basePath: ""
 paths:
   /requestLabel/{id}:
     get:
-      summary: Return the request label by id 
+      summary: Return the request label by id (authentication jwt)
       description: Return the specifications of request label and her respective status
       produces:
         - "application/json"
@@ -21,6 +21,12 @@ paths:
             type: integer
           required: true
           description: Request Id
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            format: jwt
+          required: true
       responses:
         200:
           description: "Status attributes of request labels"
@@ -59,7 +65,7 @@ paths:
           description: "Server Error"
   /download/{id}:
     get:
-      summary: "Method for download zip file"
+      summary: Method for download zip file (authentication jwt)
       consumes:
         - "application/json"
       produces:
@@ -71,6 +77,12 @@ paths:
             type: integer
           required: true
           description: Request Id
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            format: jwt
+          required: true
       responses:
         200:
           description: Zip buffer response
@@ -201,3 +213,7 @@ definitions:
         type: string
         description: url allowed zip file
         example: "https://zipfile..."
+      token:
+        type: string
+        description: token
+        example: "eydasdd...."
