@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-import { saveRequestI, getRequestByIdI } from '../core/interactors';
+import { saveRequestI, getRequestByIdI } from '../../core/interactors';
 
 /**
  * send the body for do a request with an array of labels if save the request the response is 
@@ -13,7 +13,7 @@ export const createrequestLabelController = async (request:Request, response:Res
         const requestLabel = await saveRequestI(body);
         response.status(200).json(requestLabel);
     }catch(error){
-        response.status(500).json(error);
+        response.status(500).json({"error": error, "status": 500});
     }
 }
 
@@ -28,11 +28,11 @@ export const getRequestByIdController = async (request:Request, response:Respons
     try {
         const requestLabel = await getRequestByIdI(params.id);
         if (!requestLabel){
-            response.status(404).json({"response": "request not found", "status": "404"});
+            response.status(404).json({"error": "request not found", "status": 404});
         } 
         response.status(200).json(requestLabel);
     }catch(error) {
-        response.status(500).json(error);
+        response.status(500).json({"error": `Something goes wrong ${error}`, status: 500 });
     }
 }
 

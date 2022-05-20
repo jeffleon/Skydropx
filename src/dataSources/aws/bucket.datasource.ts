@@ -40,6 +40,19 @@ class Bucket {
           const url = `https://${process.env.S3_Bucket}.s3.eu-west-1.amazonaws.com/${params.Key}`;
           return url;
     }
+    /**
+     * get object of id
+     * @param params
+     */
+    public async downloadFile(params:any) {
+        try {
+            var fileStream = s3.getObject(params).createReadStream();
+            return fileStream;
+        } catch(error) {
+            throw new Error(`Something goes wrong ${error}`)
+        }
+        
+    }
 
     /**
      * Function that inicialize the bucket with policy to become the bucket in a public bucket

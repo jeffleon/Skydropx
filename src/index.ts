@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotEnv from 'dotenv';
-import {createrequestLabelController, getRequestByIdController} from './controllers/requestLabelHttp.controller';
+import {createrequestLabelController, getRequestByIdController} from './controllers/requestLabel/requestLabelHttp.controller';
 import requestLabelSequelize from './dataSources/orm/requestLabelSequelize.datasource';
 import Bucket from './dataSources/aws/bucket.datasource';
 import swaggerUi from 'swagger-ui-express';
