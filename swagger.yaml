@@ -57,6 +57,27 @@ paths:
                 $ref: '#/definitions/Request'
         500:
           description: "Server Error"
+  /download/{id}:
+    get:
+      summary: "Method for download zip file"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/zip"
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Request Id
+      responses:
+        200:
+          description: Zip buffer response
+          content:
+            application/zip:
+        500:
+          description: "Server Error"
 
 definitions:
   Shipping Information:

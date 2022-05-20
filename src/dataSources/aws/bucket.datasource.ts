@@ -1,5 +1,6 @@
 import s3 from "./config";
 import 'dotenv/config';
+import { BucketParams } from "../../types/bucketparams.types";
 
 
 class Bucket {
@@ -32,7 +33,7 @@ class Bucket {
      * @param params 
      * @returns Promise<string>
      */
-    public async uploadFile(params:any):Promise<string>{
+    public async uploadFile(params:BucketParams):Promise<string>{
           s3.upload(params, (err:Error) => {
             if (err) throw new Error(`Something when wrong upload file ${err}`);
             else console.info("File successfully uploaded.");
@@ -44,7 +45,7 @@ class Bucket {
      * get file for the param key 
      * @param params
      */
-    public async downloadFile(params:any) {
+    public async downloadFile(params:BucketParams) {
         try {
             var fileStream = s3.getObject(params).createReadStream();
             return fileStream;
