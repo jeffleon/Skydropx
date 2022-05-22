@@ -5,10 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-    "build": "tsc",
+    "build": "tsc -p .",
     "watch": "tsc -w & nodemon .",
-    "prestart": "npm run build",
-    "start": "node .",
+    "dev": "ts-node src/index.ts",
+    "start": "ts-node dist/index.js",
     "test": "jest -c ./jest.unit.json",
     "test:coverage": "jest --coverage -c ./jest.unit.json"
   },
