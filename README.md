@@ -104,9 +104,16 @@ _Below is an example of how you can install and setting up The app._
     userAws=userAws
     databaseAWS=database
    ```
+<h4>Run with docker</h4>
+
 5. Run docker-compose up command
     ```
     docker compose up -d
+    ```
+
+<h4>Run in console </h4>
+    ```
+    npm run dev
     ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
