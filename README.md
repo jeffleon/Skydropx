@@ -33,6 +33,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
+    <li><a href="#deploy">Deploy</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -98,6 +99,9 @@ _Below is an example of how you can install and setting up The app._
     accessKeyId=accesskeyexample
     secretAccessKey=secretkeyexample
     S3_Bucket=bucketexample
+    passwordAws=passwordexample
+    hostAws=hostAws
+    userAws=userAws
    ```
 5. Run docker-compose up command
     ```
