@@ -99,8 +99,8 @@ _Below is an example of how you can install and setting up The app._
     accessKeyId=accesskeyexample
     secretAccessKey=secretkeyexample
     S3_Bucket=bucketexample
-    passwordAws=passwordexample
-    hostAws=hostAws
+    passwordDBAws=passwordexample
+    hostDBAws=hostAws
     userAws=userAws
     databaseAWS=database
    ```
