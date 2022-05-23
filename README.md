@@ -110,8 +110,9 @@ _Below is an example of how you can install and setting up The app._
     ```
     docker compose up -d
     ```
-
 <h4>Run in console </h4>
+
+6. Run npm comand 
     ```
     npm run dev
     ```
