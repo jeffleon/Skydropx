@@ -102,6 +102,7 @@ _Below is an example of how you can install and setting up The app._
     passwordAws=passwordexample
     hostAws=hostAws
     userAws=userAws
+    databaseAWS=database
    ```
 5. Run docker-compose up command
     ```
