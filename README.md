@@ -101,7 +101,7 @@ _Below is an example of how you can install and setting up The app._
     S3_Bucket=bucketexample
     passwordDBAws=passwordexample
     hostDBAws=hostAws
-    userAws=userAws
+    userDBAws=userAws
     databaseAWS=database
    ```
 <h4>Run with docker</h4>
