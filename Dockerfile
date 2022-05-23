@@ -1,5 +1,4 @@
-FROM node:12.18.1
-
+FROM node:14
 
 WORKDIR /usr/src/app
 
@@ -11,4 +10,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD [ "npm", "run", "dev"]
+CMD [ "npm", "run", "start"]

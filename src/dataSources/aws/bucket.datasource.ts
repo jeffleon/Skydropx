@@ -28,9 +28,9 @@ class Bucket {
     }
 
     /**
-     * Function that upload the zip file in a aws Bucket 
+     * Function that upload the zip file in a aws Bucket
      * return the url to download the pdf
-     * @param params 
+     * @param params
      * @returns Promise<string>
      */
     public async uploadFile(params:BucketParams):Promise<string>{
@@ -42,24 +42,24 @@ class Bucket {
           return url;
     }
     /**
-     * get file for the param key 
+     * get file for the param key
      * @param params
      */
     public async downloadFile(params:BucketParams) {
         try {
-            var fileStream = s3.getObject(params).createReadStream();
+            const fileStream = s3.getObject(params).createReadStream();
             return fileStream;
         } catch(error) {
             throw new Error(`Something goes wrong ${error}`)
         }
-        
+
     }
 
     /**
      * Function that inicialize the bucket with policy to become the bucket in a public bucket
      */
     public async createBucket(){
-        let bucketPolicyParams = {Bucket: process.env.S3_Bucket, Policy: JSON.stringify(this.policy)};
+        const bucketPolicyParams = {Bucket: process.env.S3_Bucket, Policy: JSON.stringify(this.policy)};
 
         s3.createBucket(this.params, function(err, data) {
             if (err && err.statusCode == 409){

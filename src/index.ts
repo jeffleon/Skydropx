@@ -11,7 +11,7 @@ import router from './routes';
 const swaggerDocument = YAML.load('./swagger.yaml');
 
 dotEnv.config();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 export const app = express();
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

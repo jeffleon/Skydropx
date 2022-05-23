@@ -7,19 +7,19 @@ process.on("message", async ({shippingInfo, id})=> {
     const zipBuffer = await zipGenerator(shippingInfo, id);
     console.log("Create Zip buffer!!");
     uploadZip(zipBuffer, id);
-    //process.exit();
+    // process.exit();
 });
 
 /**
  * Get an array Buffer and call the method that upload this buffer in S3 aws
- * @param zipBuffer 
- * @param id 
+ * @param zipBuffer
+ * @param id
  */
 export const uploadZip = async (zipBuffer:any, id:string) => {
     const bucket = new Bucket();
     const requestlabel = new requestLabelSequelize();
     const buffer = Buffer.from(zipBuffer);
-    var params = {
+    const params = {
         Bucket: process.env.S3_Bucket,
         Key: `${id}.zip`,
         Body: buffer
@@ -29,11 +29,11 @@ export const uploadZip = async (zipBuffer:any, id:string) => {
 }
 
 /**
- * Get the shipping information with this data call the method to create a buffer of Pdfs 
- * and then call the method to create the zip buffer 
+ * Get the shipping information with this data call the method to create a buffer of Pdfs
+ * and then call the method to create the zip buffer
  * return the zip buffer
- * @param shippingInformation 
- * @param id 
+ * @param shippingInformation
+ * @param id
  * @returns Buffer
  */
 export const zipGenerator = async (shippingInformation:ShippingInformationType[], id: string) => {
@@ -47,15 +47,15 @@ export const zipGenerator = async (shippingInformation:ShippingInformationType[]
 /**
  * This function call the method to create the buffer whit the Pdfs
  * return the buffer PDfs
- * @param zipPdf 
- * @param shippingInformation 
- * @param id 
+ * @param zipPdf
+ * @param shippingInformation
+ * @param id
  * @returns Buffer
  */
 export const pdfGenerator = async(zipPdf:ZipPdf, shippingInformation:ShippingInformationType[], id:string)=>{
     const bufferArray = [];
     for(const label of shippingInformation) {
-        bufferArray.push(await zipPdf.createPdf(label.shipment)); 
+        bufferArray.push(await zipPdf.createPdf(label.shipment));
     }
     return bufferArray;
 }

@@ -8,9 +8,9 @@ import sequelize from "./config";
 class requestLabelSequelize implements LabelRequestRepository {
 
     /**
-     * This funtion interact with ORM for save a request label 
+     * This funtion interact with ORM for save a request label
      * return the object created
-     * @param request 
+     * @param request
      * @returns Promise<RequestLabel>
      */
     public async save(request: RequestLabel): Promise<RequestLabel> {
@@ -25,7 +25,7 @@ class requestLabelSequelize implements LabelRequestRepository {
     /**
      * This funtion interact with ORM find a request with a specific id
      * return the request found
-     * @param requestId 
+     * @param requestId
      * @returns Promise<RequestLabel>
      */
     public async getById(requestId: string): Promise<RequestLabel> {
@@ -40,8 +40,8 @@ class requestLabelSequelize implements LabelRequestRepository {
     /**
      * This method interact with ORM to update the status of request label
      * return the number of rows changed
-     * @param requestId 
-     * @param status 
+     * @param requestId
+     * @param status
      * @returns Promise<number>
      */
     public async updateStatus(requestId: string, status: string): Promise<number> {
@@ -60,8 +60,8 @@ class requestLabelSequelize implements LabelRequestRepository {
     /**
      * This function update the url that contains the zip file
      * return the number of rows changed
-     * @param requestId 
-     * @param url 
+     * @param requestId
+     * @param url
      * @returns Promise<number>
      */
     public async updateUrl(requestId: string, url: string): Promise<number> {
@@ -74,7 +74,7 @@ class requestLabelSequelize implements LabelRequestRepository {
             return updatedRows;
         }catch(error){
             throw new Error(`Update url request label error: ${error}`);
-        }  
+        }
     }
 
     /**

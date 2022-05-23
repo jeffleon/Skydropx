@@ -3,13 +3,13 @@ import { ShippingDetailsObject } from "../../types/shippingInformation";
 /**
  * Create the content of pdf
  * return the HTML content
- * @param shippingInfo 
+ * @param shippingInfo
  * @returns HTML
  */
 export const content = (shippingInfo: ShippingDetailsObject) => {
 
-    const emptyObjectAdess = { 
-        name: "", city: "", country_code: "", 
+    const emptyObjectAdess = {
+        name: "", city: "", country_code: "",
         postal_code: "", street1: "" , province: ""
     };
 

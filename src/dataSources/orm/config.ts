@@ -6,9 +6,9 @@ import 'dotenv/config';
  */
 const sequelize = new Sequelize(
     process.env.database,
-    process.env.user,
-    process.env.password,{
-        host: process.env.host,
+    process.env.userAws,
+    process.env.passwordAws,{
+        host: process.env.hostAws,
         dialect: "mysql"
     }
 );

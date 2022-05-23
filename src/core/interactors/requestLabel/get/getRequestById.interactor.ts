@@ -3,16 +3,16 @@ import LabelRequestRepository from "../../../repositories/labelRequest.repositor
 
 
 /**
- * This interactor inyect the dependencies of a labelRequestRepository 
+ * This interactor inyect the dependencies of a labelRequestRepository
  * then call the method that find the  request with this specific id and return it
- * return the request 
- * @param labelRequestRepository 
+ * return the request
+ * @param labelRequestRepository
  * @returns
  * @param id
  * @returns Promise<RequestLabel> | Error
  */
 const getRequestById = (labelRequestRepository:LabelRequestRepository, jwt:JwtRepository) => async (id:string, token:string) => {
-    try {  
+    try {
         const request = await labelRequestRepository.getById(id);
         if (request && request?.carrierName) {
             const decode = jwt.verifyToken(token);

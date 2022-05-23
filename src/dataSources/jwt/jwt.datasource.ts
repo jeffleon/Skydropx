@@ -3,12 +3,12 @@ import JwtRepository from "../../core/repositories/jwt.repository";
 
 
 class Jwt implements JwtRepository {
-    
+
     /**
      * Create token with carrierName and requestId
-     * @param carrier 
-     * @param id 
-     * @returns 
+     * @param carrier
+     * @param id
+     * @returns
      */
     public createToken(carrier:string, id:string):string{
         if (carrier && id){
@@ -29,7 +29,7 @@ class Jwt implements JwtRepository {
     /**
      * Verify the token
      * @param token
-     * @returns 
+     * @returns
      */
     public verifyToken(token:string):any{
         if (token){

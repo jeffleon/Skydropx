@@ -3,7 +3,7 @@ import { createrequestLabelController, getRequestByIdController } from "../contr
 import { downloadFileController } from "../controllers/bucket/downloadHttp.controller";
 
 
-let router = Router();
+const router = Router();
 router.post('/requestLabel', createrequestLabelController);
 router.get('/requestLabel/:id', getRequestByIdController);
 router.get('/download/:id', downloadFileController);

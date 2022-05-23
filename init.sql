@@ -1,1 +1,1 @@
-CREATE DATABASE sky_dropx;
+CREATE DATABASE skydropx;
