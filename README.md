@@ -136,7 +136,7 @@ The app is deploy in AWS EC2 in the follow link http://ec2-54-77-160-29.eu-west-
 
 ## Test with postman
 
-You can see the postman collection in the following link https://www.getpostman.com/collections/dc3373f2b5dabbbf89ce remember that the token only works 2 hours 
+You can see the postman collection in the following link https://www.getpostman.com/collections/a8a0a485056a884aa3de remember that the token only works 2 hours 
 
 ## Usage
 
