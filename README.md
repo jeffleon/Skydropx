@@ -136,6 +136,10 @@ The app is deploy in AWS EC2 in the follow link http://ec2-54-77-160-29.eu-west-
 
 ## Test with postman
 
+<div align="center">
+    <img src="https://www.sngular.com/wp-content/uploads/2021/12/Blog-Postman-1024x411.png" alt="Logo">
+</div>
+
 You can see the postman collection in the following link https://www.getpostman.com/collections/a8a0a485056a884aa3de remember that the token only works 2 hours 
 
 ## Usage
