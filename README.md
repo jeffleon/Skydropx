@@ -126,7 +126,7 @@ _Below is an example of how you can install and setting up The app._
     <img src="images/EC2.png" alt="Logo">
 </div>
 
-The app is deploy in AWS EC2 in the follow link http://ec2-63-35-228-19.eu-west-1.compute.amazonaws.com:8080/
+The app is deploy in AWS EC2 in the follow link http://ec2-54-77-160-29.eu-west-1.compute.amazonaws.com:8080/
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -135,7 +135,7 @@ The app is deploy in AWS EC2 in the follow link http://ec2-63-35-228-19.eu-west-
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-If you have any issue or if you need something see the documentation of API in the endpoint http://ec2-63-35-228-19.eu-west-1.compute.amazonaws.com:8080/api-docs/
+If you have any issue or if you need something see the documentation of API in the endpoint http://ec2-54-77-160-29.eu-west-1.compute.amazonaws.com:8080/api-docs/
 
 <div align="center">
     <img src="images/swagger.png" alt="Logo">
