@@ -93,9 +93,9 @@ _Below is an example of how you can install and setting up The app._
 4. Enter your enviroment variables `.env` see the `.env.sample`
    ```js
     database=sky_dropx
-    user=root
-    password=secret
-    host=db
+    user=db_user
+    password=db_password
+    host=db_host
     accessKeyId=accesskeyexample
     secretAccessKey=secretkeyexample
     S3_Bucket=bucketexample
